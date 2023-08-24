@@ -18,6 +18,7 @@ app.secret_key = "6541161bb5c294faa5262ddcae6571871242c32c1bd90d341290f734843606
 
 PLACEHOLDER_CODE = "print('Hello, World!')"
 DEFAULT_STYLE = "monokai"
+NO_CODE_FALLBACK = "# No Code Entered"
 
 
 @app.route("/", methods=["GET"])
@@ -43,6 +44,7 @@ def style():
     context = {
         "message": "Select Your Style 🎨",
         "all_styles": list(get_all_styles()),
+        "style": session["style"],
         "style_definitions": formatter.get_style_defs(),
         "style_bg_color": formatter.style.background_color,
         "highlighted_code": highlight(
@@ -54,7 +56,7 @@ def style():
 
 @app.route("/save_code", methods=["POST"])
 def save_code():
-    session["code"] = request.form.get("code")
+    session["code"] = request.form.get("code") or NO_CODE_FALLBACK
     return redirect(url_for("code"))
 
 
@@ -70,7 +72,7 @@ def save_style():
     if request.form.get("style") is not None:
         session["style"] = request.form.get("style")
     if request.form.get("code") is not None:
-        session["code"] = request.form.get("code")
+        session["code"] = request.form.get("code") or NO_CODE_FALLBACK
     return redirect(url_for("style"))
 
 
