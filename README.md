@@ -1,4 +1,6 @@
+# Code Image Generator
 
+Visit [http://code-image-generator.rco.sh/](http://code-image-generator.rco.sh/)
 ## Remove environment EC2 Setup (Ubuntu)
 
 ```sh
@@ -46,6 +48,23 @@ with sync_playwright() as playwright:
     found_element = page.locator(element)
     text = found_element.text_content()
     browser.close()
+```
+# Docker
+
+```sh
+docker build -t code-image-generator .
+docker run -p 5000:5000 code-image-generator
+----
+```
+
+# ECR / ECS
+
+```sh
+docker build -t code-image-generator:latest .
+aws ecr get-login-password --region sa-east-1 | docker login --username AWS --password-stdin 935614717044.dkr.ecr.sa-east-1.amazonaws.com
+docker tag code-image-generator:latest 935614717044.dkr.ecr.sa-east-1.amazonaws.com/code-image-generator:latest
+docker push 935614717044.dkr.ecr.sa-east-1.amazonaws.com/code-image-generator:latest
+aws ecs update-service --cluster code-image-generator --service code-image-generator --force-new-deployment --region sa-east-1
 ```
 
 ## References

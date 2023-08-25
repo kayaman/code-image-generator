@@ -12,41 +12,30 @@ body {
 }
 
 
+
 main {
-
     display: flex;
-
     justify-content: center;
-
+    min-height: max-content;
     text-align: center;
-
 }
 
 
 h1 {
-
     font-size: 2em;
-
     text-align: center;
-
     line-height: 1em;
-
 }
 
 
 h1 a {
-
     text-decoration: none;
-
     color: inherit;
-
 }
 
 
 span {
-
     color: deepskyblue;
-
 }
 
 button,

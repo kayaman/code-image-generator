@@ -16,6 +16,10 @@ from utils import take_screenshot_from_url
 app = Flask(__name__)
 app.secret_key = "6541161bb5c294faa5262ddcae6571871242c32c1bd90d341290f7348436065a"
 
+if __name__ == "__main__":
+    app.run(debug=True)
+
+
 PLACEHOLDER_CODE = "print('Hello, World!')"
 DEFAULT_STYLE = "monokai"
 NO_CODE_FALLBACK = "# No Code Entered"
